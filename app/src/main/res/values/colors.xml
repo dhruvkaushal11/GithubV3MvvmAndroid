@@ -2,4 +2,5 @@
 <resources>
     <color name="colorText">#000</color>
     <color name="colorPrimary">#FF6200EE</color>
+    <color name="colorBackground">#DDDDDD</color>
 </resources>

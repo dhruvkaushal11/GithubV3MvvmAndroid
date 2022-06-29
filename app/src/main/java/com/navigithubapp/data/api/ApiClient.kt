@@ -56,7 +56,7 @@ class ApiClient {
             // Chuck's interceptor (for debugging)
             httpClient.addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer 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")
+
 
                 chain.proceed(requestBuilder.apply {
 
