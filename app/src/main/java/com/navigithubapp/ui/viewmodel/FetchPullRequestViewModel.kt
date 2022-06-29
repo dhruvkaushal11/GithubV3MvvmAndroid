@@ -7,35 +7,40 @@ import com.navigithubapp.data.api.ApiClient
 import com.navigithubapp.data.modal.Commit
 import com.navigithubapp.data.repository.GithubRepository
 
+
 class FetchPullRequestViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
     private val netRepo: GithubRepository
-
+    private val progressbarObservable =  MutableLiveData<Boolean>()
     private val pullRequestToFetch = MutableLiveData<List<Commit>>()
     fun observeListGithub(): LiveData<List<Commit>> = pullRequestToFetch
+    fun observeLoadingState(): LiveData<Boolean> = progressbarObservable
 
     init {
         val apiInterface = ApiClient.getApiInterface(application)
         netRepo = GithubRepository.getInstance(apiInterface)
-        fetchPullRequest()
+
     }
 
     val fetchDataCallBack = object : GithubRepository.NetRepositoryCallback<List<Commit>> {
         override fun onSuccess(data: List<Commit>) {
             pullRequestToFetch.postValue(data)
+            progressbarObservable.value = false
         }
 
         override fun onError(code: Int?, message: String?) {
 
             pullRequestToFetch.postValue(null)
+            progressbarObservable.value = false
+
 
         }
     }
 
     fun fetchPullRequest(): LiveData<List<Commit>> {
-
+        progressbarObservable.value = true
         netRepo.getClosedPullRequest(0, fetchDataCallBack)
         return pullRequestToFetch;
     }
