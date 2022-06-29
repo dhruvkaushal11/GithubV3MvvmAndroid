@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.navigithubapp.BuildConfig
 import com.navigithubapp.R
 import com.navigithubapp.data.modal.Commit
 import com.navigithubapp.databinding.ActivityMainBinding
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         subscribeObservers()
 
-        viewModel.fetchPullRequest()
+        viewModel.fetchPullRequest(BuildConfig.OWNER, BuildConfig.REPO)
 
 
 

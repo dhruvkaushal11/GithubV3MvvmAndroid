@@ -22,9 +22,12 @@ android {
         dataBinding = true
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://api.github.com\""
+            buildConfigField "String", "REPO", "\"GithubV3MvvmAndroid\""
+            buildConfigField "String", "OWNER", "\"dhruvkaushal11\""
         }
     }
     compileOptions {
@@ -38,7 +41,7 @@ android {
     productFlavors {
         staging {
             dimension "default"
-            resValue "string", "baseUrl", "https://api.github.com"
+
 
         }
     }

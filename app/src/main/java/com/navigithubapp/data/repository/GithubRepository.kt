@@ -15,9 +15,9 @@ private const val TAG = "GithubRepository"
 
 class GithubRepository private constructor(private val apiInterface: ApiInterface) {
     //Repository for Network Request
-    fun getClosedPullRequest(page: Int, callback: NetRepositoryCallback<List<Commit>>) {
+    fun getClosedPullRequest(owner: String, repo : String, callback: NetRepositoryCallback<List<Commit>>) {
 
-        apiInterface.getClosePillRequest().enqueue(object : retrofit2.Callback<List<Commit>> {
+        apiInterface.getClosePillRequest(owner, repo).enqueue(object : retrofit2.Callback<List<Commit>> {
             override fun onResponse(call: Call<List<Commit>>, response: Response<List<Commit>>) {
                 if(response.isSuccessful)
                     callback.onSuccess(response.body()!!)
