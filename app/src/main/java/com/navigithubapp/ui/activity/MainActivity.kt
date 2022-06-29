@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         viewModel = FetchPullRequestViewModel.factory(this)
         subscribeObservers()
 
-        viewModel.fetchPullRequest()
+
+
 
     }
 

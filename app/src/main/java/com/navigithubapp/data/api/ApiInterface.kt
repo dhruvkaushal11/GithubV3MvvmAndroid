@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
-    @GET("/repos/dhruvkaushal11/Pascolan/pulls?state=closed")
+    @GET("/repos/dhruvkaushal11/GithubV3MvvmAndroid/pulls?state=closed")
     fun getClosePillRequest(): Call<List<Commit>>
 
 }
