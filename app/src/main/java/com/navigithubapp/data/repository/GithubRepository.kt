@@ -19,6 +19,7 @@ class GithubRepository private constructor(private val apiInterface: ApiInterfac
 
         apiInterface.getClosePillRequest().enqueue(object : retrofit2.Callback<List<Commit>> {
             override fun onResponse(call: Call<List<Commit>>, response: Response<List<Commit>>) {
+                if(response.isSuccessful)
                     callback.onSuccess(response.body()!!)
             }
             override fun onFailure(call: Call<List<Commit>>, t: Throwable) {

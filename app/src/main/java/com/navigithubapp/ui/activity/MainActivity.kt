@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.recyclerView.adapter = pullRequestAdapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
 
 
     }

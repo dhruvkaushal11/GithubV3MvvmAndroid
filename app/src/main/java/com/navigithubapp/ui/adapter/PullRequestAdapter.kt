@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.navigithubapp.R
 import com.navigithubapp.data.modal.Commit
 import com.navigithubapp.databinding.ItemGithubBinding
+import com.navigithubapp.utils.UtilityMethods
 
 class PullRequestAdapter() : RecyclerView.Adapter<PullRequestAdapter.MentorViewHolder>() {
     private var data = emptyList<Commit>()
@@ -14,6 +15,7 @@ class PullRequestAdapter() : RecyclerView.Adapter<PullRequestAdapter.MentorViewH
     inner class MentorViewHolder(val binding: ItemGithubBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(commit: Commit) {
             binding.commit = commit
+
 
             binding.executePendingBindings()
         }
