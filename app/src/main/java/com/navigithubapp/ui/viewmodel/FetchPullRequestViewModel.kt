@@ -39,9 +39,9 @@ class FetchPullRequestViewModel(
         }
     }
 
-    fun fetchPullRequest(): LiveData<List<Commit>> {
+    fun fetchPullRequest(owner : String, repo :String): LiveData<List<Commit>> {
         progressbarObservable.value = true
-        netRepo.getClosedPullRequest(0, fetchDataCallBack)
+        netRepo.getClosedPullRequest(owner,repo, fetchDataCallBack)
         return pullRequestToFetch;
     }
 

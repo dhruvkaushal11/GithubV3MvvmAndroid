@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
+import com.navigithubapp.BuildConfig
 import com.navigithubapp.R
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -29,7 +30,7 @@ class ApiClient {
                 if (localRef != null) {
                     localRef!!
                 } else {
-                    val retrofit = getRetrofit(application, "https://api.github.com")
+                    val retrofit = getRetrofit(application, BuildConfig.BASE_URL)
                     retrofit.create(ApiInterface::class.java).also {
                         this@Companion.apiInterface = it
                     }
