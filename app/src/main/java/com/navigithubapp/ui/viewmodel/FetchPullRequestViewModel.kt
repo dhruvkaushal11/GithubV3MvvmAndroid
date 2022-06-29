@@ -19,6 +19,7 @@ class FetchPullRequestViewModel(
     init {
         val apiInterface = ApiClient.getApiInterface(application)
         netRepo = GithubRepository.getInstance(apiInterface)
+        fetchPullRequest()
     }
 
     val fetchDataCallBack = object : GithubRepository.NetRepositoryCallback<List<Commit>> {
