@@ -32,7 +32,7 @@ class FetchPullRequestViewModel(
 
         override fun onError(code: Int?, message: String?) {
 
-            pullRequestToFetch.postValue(null)
+            pullRequestToFetch.postValue(arrayListOf())
             progressbarObservable.value = false
 
 

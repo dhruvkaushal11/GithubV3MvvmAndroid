@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -25,9 +26,14 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         viewModel = FetchPullRequestViewModel.factory(this)
-        subscribeObservers()
-        viewModel.fetchPullRequest()
+
+
         setUpRecyclerViews()
+
+        subscribeObservers()
+
+        viewModel.fetchPullRequest()
+
 
 
     }
@@ -36,8 +42,15 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeObservers() {
         viewModel.observeListGithub().observe(this, Observer {
             it?.let { data ->
-                pullRequestAdapter.setData(data)
+                if(data.isNotEmpty()){
+                    pullRequestAdapter.setData(data)
+                }
+                else{
+                    binding.noData.visibility = View.VISIBLE
+                }
+
             }
+
         })
 
         viewModel.observeLoadingState().observe(this, Observer {

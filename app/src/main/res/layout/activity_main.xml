@@ -35,5 +35,16 @@
             android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:id="@+id/no_data"
+            android:text="No Data Found!\n\nPlease Check your Internet Connection"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
