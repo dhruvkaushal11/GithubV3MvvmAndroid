@@ -21,4 +21,4 @@ Variables can be changed directly from App Level build.gradle
     
 
 
-<img src='https://i.ibb.co/6PkHFqr/Screen-Shot.png' width="300px">
+<img src='https://sagemaker-ap-south-1-718161324995.s3.ap-south-1.amazonaws.com/ScreenShot.png' width="300px">
