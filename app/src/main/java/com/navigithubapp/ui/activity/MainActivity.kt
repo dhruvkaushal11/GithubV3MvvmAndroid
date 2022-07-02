@@ -5,8 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.navigithubapp.BuildConfig
@@ -15,18 +17,17 @@ import com.navigithubapp.data.modal.Commit
 import com.navigithubapp.databinding.ActivityMainBinding
 import com.navigithubapp.ui.adapter.PullRequestAdapter
 import com.navigithubapp.ui.viewmodel.FetchPullRequestViewModel
-
-
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: FetchPullRequestViewModel
+    private val viewModel by viewModels<FetchPullRequestViewModel>()
+
     private var pullRequestAdapter = PullRequestAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        viewModel = FetchPullRequestViewModel.factory(this)
 
 
         setUpRecyclerViews()
