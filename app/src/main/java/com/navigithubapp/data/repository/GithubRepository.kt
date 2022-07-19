@@ -2,6 +2,8 @@ package com.navigithubapp.data.repository
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.paging.*
 import com.navigithubapp.R
 import com.navigithubapp.data.api.ApiInterface
 import com.navigithubapp.data.modal.Commit
@@ -11,24 +13,33 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 import javax.inject.Inject
+
+import com.annchar.coinranking.data.pagingsources.GithubPagingSource
 import javax.inject.Singleton
 
 private const val TAG = "GithubRepository"
+
+const val NETWORK_PAGE_SIZE = 500
+private const val INITIAL_LOAD_SIZE = 1
+
 @Singleton
 class GithubRepository @Inject constructor(private val apiInterface: ApiInterface) {
     //Repository for Network Request
-    fun getClosedPullRequest(owner: String, repo : String, callback: NetRepositoryCallback<List<Commit>>) {
+    fun getClosedPullRequest(owner: String, repo : String): LiveData<PagingData<Commit>> {
 
-        apiInterface.getClosePillRequest(owner, repo).enqueue(object : retrofit2.Callback<List<Commit>> {
-            override fun onResponse(call: Call<List<Commit>>, response: Response<List<Commit>>) {
-                if(response.isSuccessful)
-                    callback.onSuccess(response.body()!!)
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false,
+                initialLoadSize = 2
+            ),
+            pagingSourceFactory = {
+                GithubPagingSource(owner, repo, apiInterface)
             }
-            override fun onFailure(call: Call<List<Commit>>, t: Throwable) {
-                Log.e(TAG, "onFailure: ", t)
-                callback.onError(null)
-            }
-        })
+            , initialKey = 1
+        ).liveData
+
     }
     interface NetRepositoryCallback<T> {
         fun onSuccess(data: T)

@@ -1,4 +1,4 @@
-package com.example.mvvm_retrofit_imagesearchapp.di
+package com.navigithubapp.di
 
 import com.navigithubapp.BuildConfig
 import com.navigithubapp.data.api.ApiInterface
