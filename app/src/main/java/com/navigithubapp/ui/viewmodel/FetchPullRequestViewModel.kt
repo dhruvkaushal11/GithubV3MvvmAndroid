@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import com.navigithubapp.data.modal.Commit
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 
 import com.navigithubapp.data.repository.GithubRepository
 
@@ -34,10 +36,9 @@ class FetchPullRequestViewModel @ViewModelInject constructor(
         }
     }
 
-     fun fetchPullRequest(owner : String, repo :String): LiveData<List<Commit>> {
+     fun fetchPullRequest(owner : String, repo :String): LiveData<PagingData<Commit>>{
         progressbarObservable.value = true
-        netRepo.getClosedPullRequest(owner,repo, fetchDataCallBack)
-        return pullRequestToFetch;
+        return netRepo.getClosedPullRequest(owner,repo).cachedIn(viewModelScope)
     }
 
 }
